@@ -16,7 +16,7 @@ function FormikContainer() {
         >
         {
             formik=><form>
-                <submit type='submit'></submit>
+                <button type='submit'></button>
             </form>
         }
             
