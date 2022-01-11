@@ -1,25 +1,18 @@
-import { Formik, Form, Field ,ErrorMessage} from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import TextError from "./TextError";
 const FormComponent = () => {
   const initialValues = {
     name: "",
-    email: "",
-    channel: "",
-    phoneNumbers:['','','']
- 
-   
+    numbrPhones: ['']
   };
   const onSubmit = (values) => {
-      console.log('onsubmit :' ,values);
+    console.log("onsubmit :", values);
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Required name..."),
-    email: Yup.string().email("invalid email").required("required email"),
-    channel: Yup.string().required("required channel"),
-  
   });
 
   return (
@@ -36,31 +29,28 @@ const FormComponent = () => {
         </div>
 
         <div className="form-control">
-          <label htmlFor="email">Email</label>
-          <Field type="email" id="email" name="email" />
-          <ErrorMessage name="email">
-             {  err=><div className="error">{err}</div>}
-          </ErrorMessage>
+          <label>List phones</label>
+          <FieldArray name="numbrPhones">
+            {FieldArrayProps => {
+              const { push, remove,form } = FieldArrayProps;
+              const { values } = form;
+              const { numbrPhones } = values;
+
+              return (
+                <div>
+                  {numbrPhones.map((number, index) => (
+                    <div key={index}>
+                    
+                      <Field name={`numbrPhones[${index}]`} />
+                      {index>0 && (<button type="button" onClick={()=>remove(index)} >-</button>) }
+                      <button type="button" onClick={()=>push('')} >{'  '} +{" "}</button>
+                    </div>
+                  ))}
+                </div>
+              ); //return
+            }}
+          </FieldArray>
         </div>
-
-
-        <div className="form-control">
-          <label htmlFor="channel">Channel</label>
-          <Field  type="text" id="channel" name="channel" />
-          <ErrorMessage name="channel" component={TextError} />
-        </div>
-
-
-        <div className="form-control">
-          <label htmlFor="FirstNumber">First Number</label>
-          <Field  type="text" id="FirstNumber" name="phoneNumbers[0]" />
-        </div>
-
-        <div className="form-control">
-          <label htmlFor="SecondNumber">Second Number</label>
-          <Field  type="text" id="SecondNumber" name="phoneNumbers[1]" />
-        </div>
-
 
         <button type="submit">Submit</button>
       </Form>
