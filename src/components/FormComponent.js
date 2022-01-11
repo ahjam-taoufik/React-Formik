@@ -7,10 +7,8 @@ const FormComponent = () => {
     name: "",
     email: "",
     channel: "",
-    comments:{
-       comment1:'',
-       comment2:''
-    }
+    phoneNumbers:['','','']
+ 
    
   };
   const onSubmit = (values) => {
@@ -42,9 +40,7 @@ const FormComponent = () => {
           <Field type="email" id="email" name="email" />
           <ErrorMessage name="email">
              {  err=><div className="error">{err}</div>}
-
           </ErrorMessage>
-        
         </div>
 
 
@@ -54,15 +50,17 @@ const FormComponent = () => {
           <ErrorMessage name="channel" component={TextError} />
         </div>
 
+
         <div className="form-control">
-          <label htmlFor="comment1">Comment 1</label>
-          <Field  type="text" id="comment1" name="comments.comment1" />
+          <label htmlFor="FirstNumber">First Number</label>
+          <Field  type="text" id="FirstNumber" name="phoneNumbers[0]" />
         </div>
 
         <div className="form-control">
-          <label htmlFor="comment2">Comment 2</label>
-          <Field  type="text" id="comment2" name="comments.comment2" />
+          <label htmlFor="SecondNumber">Second Number</label>
+          <Field  type="text" id="SecondNumber" name="phoneNumbers[1]" />
         </div>
+
 
         <button type="submit">Submit</button>
       </Form>
