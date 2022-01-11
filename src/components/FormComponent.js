@@ -7,6 +7,8 @@ const FormComponent = () => {
     name: "",
     email: "",
     channel: "",
+    comment:"",
+    address:''
   };
   const onSubmit = (values) => {
       console.log('onsubmit :' ,values);
@@ -16,6 +18,7 @@ const FormComponent = () => {
     name: Yup.string().required("Required name..."),
     email: Yup.string().email("invalid email").required("required email"),
     channel: Yup.string().required("required channel"),
+  
   });
 
   return (
@@ -41,12 +44,34 @@ const FormComponent = () => {
         
         </div>
 
+
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
           <Field  type="text" id="channel" name="channel" />
-          <ErrorMessage name="channel"/>
-         
+          <ErrorMessage name="channel" component={TextError} />
         </div>
+
+        <div className="form-control">
+          <label htmlFor="comment">comment</label>
+          <Field as="textarea" id="comment" name="comment" />
+        </div>
+
+        <div className="form-control">
+        <label htmlFor="address">address</label>
+      {/* ============================================================ */}
+        <Field name='address' >
+      
+            {(props)=>{
+                const{field,form,meta}=props
+                console.log(props)
+                console.log(field)
+                return <input type='text' id="address" />
+                }}
+        </Field>
+      {/* ============================================================ */}
+        </div>
+
+
 
         <button type="submit">Submit</button>
       </Form>
