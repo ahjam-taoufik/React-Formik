@@ -38,7 +38,8 @@ const formik= useFormik({
 })
 
 // console.log(formik.values);
-console.log(formik.errors.name);
+//console.log(formik.errors.name);
+//console.log( 'fields visited', formik.touched);
 
     return (
         <div>
@@ -48,19 +49,19 @@ console.log(formik.errors.name);
                  
              <div className='form-control'>
              <label htmlFor='name'>Name</label>
-             <input onChange={formik.handleChange} value={formik.values.name}   type='text' id='name' name='name'/>
+             <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name}   type='text' id='name' name='name'/>
              {formik.errors.name?<div className='error'>{formik.errors.name}</div>:null}
              </div>
             
              <div className='form-control'>
              <label htmlFor='email'>Email</label>
-             <input onChange={formik.handleChange} value={formik.values.email}  type='email' id='email' name='email'/>
+             <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email}  type='email' id='email' name='email'/>
              {formik.errors.email?<div className='error'>{formik.errors.email}</div>:null}
              </div>
             
              <div className='form-control'>
              <label htmlFor='channel'>Channel</label>
-             <input onChange={formik.handleChange} value={formik.values.channel}  type='text' id='channel' name='channel'/>
+             <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.channel}  type='text' id='channel' name='channel'/>
              {formik.errors.channel?<div className='error'>{formik.errors.channel}</div>:null}
              </div>
              
