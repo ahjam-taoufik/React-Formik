@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import TextError from "./TextError";
@@ -20,13 +20,18 @@ const FormComponent = () => {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
+      validateOnBlur={false}
+      validateOnChange={false}
     >
       <Form>
+
         <div className="form-control">
           <label htmlFor="name">Name</label>
           <Field type="text" id="name" name="name" />
           <ErrorMessage name="name" component={TextError} />
         </div>
+
+
 
         <div className="form-control">
           <label>List phones</label>
@@ -34,6 +39,7 @@ const FormComponent = () => {
             {FieldArrayProps => {
               const { push, remove,form } = FieldArrayProps;
               const { values } = form;
+                      console.log(form.errors);
               const { numbrPhones } = values;
 
               return (
