@@ -38,11 +38,13 @@ const FormComponent = () => {
               <ErrorMessage name="name2" component={TextError} />
             </div>
 
-
-
+             {!FORMIK.isSubmitting &&  
             <button type="submit" disabled={!FORMIK.isValid}>
               Submit
-            </button>
+            </button> }
+             {FORMIK.isSubmitting &&<div>Submiting with success </div> }
+
+
           </Form>
         );
       }}
