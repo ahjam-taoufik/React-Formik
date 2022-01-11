@@ -9,15 +9,22 @@ label {
   margin-bottom: 5px;
 }
 
+input + label {
+  font-weight: bold;
+  display: inline-flex;
+  margin-right: 20px;
+}
+
 input[type='text'],
 input[type='email'],
-select,
-textarea {
+input[type='password'],
+textarea,
+select {
   display: block;
   width: 400px;
   padding: 6px 12px;
   font-size: 14px;
-  line-height: 1.42857143;
+  line-height: 2;
   color: #555;
   background-color: #fff;
   background-image: none;

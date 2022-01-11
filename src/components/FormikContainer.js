@@ -10,19 +10,28 @@ const selectList=[
     {key:"option 1", value:'option1'},
     {key:"option 2", value:'option2'},
     {key:"option 3", value:'option3'},
+]
 
+const radioList=[
+    {key:"option 1", value:'roption1'},
+    {key:"option 2", value:'roption2'},
+    {key:"option 3", value:'roption3'},
 ]
    
+
+
 
   const initialValues = {
     email: '',
     comment: '',
-    selectOption:''
+    selectOption:'',
+    radioOption:''
   };
   const validationSchema = Yup.object({
     email: Yup.string().email().required(),
     comment: Yup.string().required(),
-    selectOption: Yup.string().required()
+    selectOption: Yup.string().required(),
+    radioOption: Yup.string().required('Select one option ')
   });
 
   const onSubmit = values =>{
@@ -55,6 +64,13 @@ const selectList=[
             label="Select An Option"
             name="selectOption"
             options={selectList}
+          />
+
+          <FormikControl
+            control="radio"
+            label="Select A radio Option"
+            name="radioOption"
+            options={radioList}
           />
           <button type='submit'>Submit</button>
         </Form>
