@@ -1,7 +1,7 @@
 
-import { Formik, FormikConsumer, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import React from 'react'
-
+import * as Yup from 'yup'
 const FormComponent = () => {
    
 const initialValues={
@@ -22,18 +22,32 @@ const validate=values=>{
    
    if(!values.email){
      errors.email='Required email'    
+   }else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)){
+    errors.email='Invalid email'   
    }
+
+
+
+
    if(!values.channel){
      errors.channel='Required channel'    
    }
 return errors
 }//validate
 
+const validationShema=Yup.object({
+    name:Yup.string().required('Required name...'),
+    email:Yup.string().email('invalid email').required('required email'),
+    channel:Yup.string().required('required channel'),
+})
+
+
 
 const formik= useFormik({
     initialValues:initialValues,
     onSubmit:onSubmit,
-    validate:validate,
+   // validate:validate,
+    validationSchema:validationShema
   
 })
 
@@ -50,19 +64,19 @@ const formik= useFormik({
              <div className='form-control'>
              <label htmlFor='name'>Name</label>
              <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name}   type='text' id='name' name='name'/>
-             {formik.errors.name?<div className='error'>{formik.errors.name}</div>:null}
+             {formik.touched.name && formik.errors.name?<div className='error'>{formik.errors.name}</div>:null}
              </div>
             
              <div className='form-control'>
              <label htmlFor='email'>Email</label>
              <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email}  type='email' id='email' name='email'/>
-             {formik.errors.email?<div className='error'>{formik.errors.email}</div>:null}
+             {formik.touched.email && formik.errors.email?<div className='error'>{formik.errors.email}</div>:null}
              </div>
             
              <div className='form-control'>
              <label htmlFor='channel'>Channel</label>
              <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.channel}  type='text' id='channel' name='channel'/>
-             {formik.errors.channel?<div className='error'>{formik.errors.channel}</div>:null}
+             {formik.touched.channel && formik.errors.channel?<div className='error'>{formik.errors.channel}</div>:null}
              </div>
              
               <button type='submit'>Submit</button>
