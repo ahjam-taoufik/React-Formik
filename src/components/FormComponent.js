@@ -1,41 +1,51 @@
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import TextError from "./TextError";
 const FormComponent = () => {
   const initialValues = {
     name: "",
+    name2: "",
   };
   const onSubmit = (values) => {
     console.log("onsubmit :", values);
   };
 
-  const errorName=value=>{
-    let error=''
-     
-     if (!value) {
-         error='required'
-     }
-    return error
-  }
+  const errorName = (value) => {
+    let error = "";
+    if (!value) {
+      error = "required";
+    }
+    return error;
+  };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      <Form>
-        <div className="form-control">
-          <label htmlFor="name">Name</label>
-          <Field type="text" id="name" name="name" validate={errorName} />
+    <Formik validateOnMount initialValues={initialValues} onSubmit={onSubmit}>
+      {(FORMIK) => {
+        console.log(FORMIK);
 
-          <ErrorMessage name="name" component={TextError} />
-        </div>
+        return (
+          <Form>
+            <div className="form-control">
+              <label htmlFor="name">Name</label>
+              <Field type="text" id="name" name="name" validate={errorName} />
+              <ErrorMessage name="name" component={TextError} />
+            </div>
 
-        <button type="submit">Submit</button>
-      </Form>
+            <div className="form-control">
+              <label htmlFor="name2">Name</label>
+              <Field type="text" id="name2" name="name2" validate={errorName} />
+              <ErrorMessage name="name2" component={TextError} />
+            </div>
+
+
+
+            <button type="submit" disabled={!FORMIK.isValid}>
+              Submit
+            </button>
+          </Form>
+        );
+      }}
     </Formik>
   );
 };
