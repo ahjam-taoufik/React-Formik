@@ -7,8 +7,11 @@ const FormComponent = () => {
     name: "",
     email: "",
     channel: "",
-    comment:"",
-    address:''
+    comments:{
+       comment1:'',
+       comment2:''
+    }
+   
   };
   const onSubmit = (values) => {
       console.log('onsubmit :' ,values);
@@ -52,26 +55,14 @@ const FormComponent = () => {
         </div>
 
         <div className="form-control">
-          <label htmlFor="comment">comment</label>
-          <Field as="textarea" id="comment" name="comment" />
+          <label htmlFor="comment1">Comment 1</label>
+          <Field  type="text" id="comment1" name="comments.comment1" />
         </div>
 
         <div className="form-control">
-        <label htmlFor="address">address</label>
-      {/* ============================================================ */}
-        <Field name='address' >
-      
-            {(props)=>{
-                const{field,form,meta}=props
-                console.log(props)
-                console.log(field)
-                return <input type='text' id="address" />
-                }}
-        </Field>
-      {/* ============================================================ */}
+          <label htmlFor="comment2">Comment 2</label>
+          <Field  type="text" id="comment2" name="comments.comment2" />
         </div>
-
-
 
         <button type="submit">Submit</button>
       </Form>
