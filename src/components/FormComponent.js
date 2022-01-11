@@ -7,8 +7,9 @@ const FormComponent = () => {
     name: "",
     name2: "",
   };
-  const onSubmit = (values) => {
+  const onSubmit = (values,onSubmitProps) => {
     console.log("onsubmit :", values);
+      onSubmitProps.resetForm()// Reset onsubmiting 
   };
 
   const errorName = (value) => {
@@ -38,11 +39,13 @@ const FormComponent = () => {
               <ErrorMessage name="name2" component={TextError} />
             </div>
 
-             {!FORMIK.isSubmitting &&  
+          
             <button type="submit" disabled={!FORMIK.isValid}>
               Submit
-            </button> }
-             {FORMIK.isSubmitting &&<div>Submiting with success </div> }
+            </button> 
+            {/* <button type="reset">RESET</button>// reset befor submiting */}
+
+           
 
 
           </Form>
