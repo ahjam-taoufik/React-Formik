@@ -32,14 +32,16 @@ const checkboxList=[
     comment: '',
     selectOption:'',
     radioOption:'',
-    checkboxOption:[]
+    checkboxOption:[],
+    datepick:null
   };
   const validationSchema = Yup.object({
     email: Yup.string().email().required(),
     comment: Yup.string().required(),
     selectOption: Yup.string().required(),
     radioOption: Yup.string().required('Select one option '),
-    checkboxOption: Yup.array().required('')
+    checkboxOption: Yup.array().required(),
+    datepick: Yup.date().required().nullable()
   });
 
   const onSubmit = values =>{
@@ -85,6 +87,12 @@ const checkboxList=[
             control="checkbox"
             label="Checkbox Option"
             name="checkboxOption"
+            options={checkboxList}
+          />
+          <FormikControl
+            control="date"
+            label="Pick a date"
+            name="datepick"
             options={checkboxList}
           />
           <button type='submit'>Submit</button>
