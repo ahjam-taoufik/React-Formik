@@ -17,6 +17,12 @@ const radioList=[
     {key:"option 2", value:'roption2'},
     {key:"option 3", value:'roption3'},
 ]
+
+const checkboxList=[
+    {key:"option 1", value:'coption1'},
+    {key:"option 2", value:'coption2'},
+    {key:"option 3", value:'coption3'}
+]
    
 
 
@@ -25,13 +31,15 @@ const radioList=[
     email: '',
     comment: '',
     selectOption:'',
-    radioOption:''
+    radioOption:'',
+    checkboxOption:[]
   };
   const validationSchema = Yup.object({
     email: Yup.string().email().required(),
     comment: Yup.string().required(),
     selectOption: Yup.string().required(),
-    radioOption: Yup.string().required('Select one option ')
+    radioOption: Yup.string().required('Select one option '),
+    checkboxOption: Yup.array().required('')
   });
 
   const onSubmit = values =>{
@@ -71,6 +79,13 @@ const radioList=[
             label="Select A radio Option"
             name="radioOption"
             options={radioList}
+          />
+
+          <FormikControl
+            control="checkbox"
+            label="Checkbox Option"
+            name="checkboxOption"
+            options={checkboxList}
           />
           <button type='submit'>Submit</button>
         </Form>
